@@ -1,8 +1,9 @@
+
 # CORS
 
 (`Cross-Origin Resource Sharing` - 교차 출처 리소스 공유)
 
-요즘에는 웹 프론트 엔드(클라이언트)와 api 서버를 따로 구성하는 경우가 많은데, 이러한 경우에 프론트 엔드에서 다른 `Origin` 의 api 서버로 요청을 보내면 문제가 발생하게 된다. 이 문제를 `CORS` 문제라고 부른다. 
+요즘에는 웹 프론트 엔드(클라이언트)와 api 서버를 따로 구성하는 경우가 많은데, 이러한 경우에 프론트 엔드에서 다른 `Origin` 의 api 서버로 요청을 보내면 문제가 발생하게 된다. 이 문제를 `CORS` 문제라고 부른다.
 
 여기서 말하는 `Origin` 이란, 아래의 세 가지 요소를 조합한 것을 말한다.
 
@@ -12,9 +13,9 @@
 
 ## 배경
 
-예전에는 브라우저에서 요청을 보내면, 서버는 해당하는 로직을 수행한 뒤 HTML 페이지를 렌더링 한 뒤 브라우저에 반환해주는 방식이 일반적이었다. 즉, 하나의 서버(동일한 `Origin`)에서 모든 작업이 수행되었다. 
+예전에는 브라우저에서 요청을 보내면, 서버는 해당하는 로직을 수행한 뒤 HTML 페이지를 렌더링 한 뒤 브라우저에 반환해주는 방식이 일반적이었다. 즉, 하나의 서버(동일한 `Origin`)에서 모든 작업이 수행되었다.
 
-그렇기 때문에 웹 사이트에서 다른 서버로 요청을 보낸다는 것을 무언가 보안상 악의적인 행동을 하려는 것으로 생각했다. 그래서 브라우저에서는 같은 `Origin`이 아니라면 요청을 막아버리는 선택을 했던 것이고, 이것이 `SOP` 정책이다. 하지만 점점 웹 사이트에서 하는 일이 많아지면서 이러한 정책이 불편해지기 시작했고, 그에 따라 이러한 `SOP` 를 우회하기 위한 방법들이 나오기 시작했다. 
+그렇기 때문에 웹 사이트에서 다른 서버로 요청을 보낸다는 것을 무언가 보안상 악의적인 행동을 하려는 것으로 생각했다. 그래서 브라우저에서는 같은 `Origin`이 아니라면 요청을 막아버리는 선택을 했던 것이고, 이것이 `SOP` 정책이다. 하지만 점점 웹 사이트에서 하는 일이 많아지면서 이러한 정책이 불편해지기 시작했고, 그에 따라 이러한 `SOP` 를 우회하기 위한 방법들이 나오기 시작했다.
 
 그 방법들 중 하나가 `JSONP` 라는 방법인데, HTML의 script 태그의 경우에는 다른 `Origin` 의 파일을 불러오는 것이 가능했고 이 것을 리소스 요청을 주고받는데 우회적으로 사용한 것이었다. 스크립트를 불러오는 것처럼 사용을 하지만 실제로는 서버에서 데이터를 반환하는 용도로 사용을 했다.
 
@@ -24,7 +25,7 @@
 
 ## SOP (Same Origin Policy)
 
-**SOP**는 동일 출처 정책으로 하나의 `Origin` 에서 로드된 문서나 스크립트가 다른 `Origin` 의 자원과 상호작용하지 못하도록 제한하는 것을 말한다. 이 정책에 의해 `XMLHttpRequest` 객체를 사용하는 등 `AJAX` 통신으로 어떠한 자원에 접근할 때 동일한 `Origin` 인 경우에만 접근이 가능하다. 
+**SOP**는 동일 출처 정책으로 하나의 `Origin` 에서 로드된 문서나 스크립트가 다른 `Origin` 의 자원과 상호작용하지 못하도록 제한하는 것을 말한다. 이 정책에 의해 `XMLHttpRequest` 객체를 사용하는 등 `AJAX` 통신으로 어떠한 자원에 접근할 때 동일한 `Origin` 인 경우에만 접근이 가능하다.
 
 ![sop](https://user-images.githubusercontent.com/49153756/97000786-3552b580-1572-11eb-8bcd-f63b2b1a176a.png)
 
@@ -33,7 +34,7 @@
 
 ```
 XMLHttpRequest cannot load '[http://localhost:3000](http://localhost:3000/)'.
-No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
 Origin '[http://localhost:8080](http://localhost:8080/)' is therefore not allowed access.
 ```
 
@@ -44,9 +45,9 @@ Origin '[http://localhost:8080](http://localhost:8080/)' is therefore not allowe
 위에서 언급했던 `SOP` 에 대한 서버단의 해결책이 바로 `CORS` 이다. 이 정책의 특징은 서버에서 외부 요청을 허용할 경우 `AJAX` 요청이 가능해진다는 것이다. `MDN` 에서는 다음과 같이 정의한다.
 
 ```
-**교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여, 
-한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 
-브라우저에 알려주는 체제입니다. 웹 애플리케이션은 리소스가 자신의 출처(도메인, 프로토콜, 포트)와 다를 때 
+**교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)는 추가 HTTP 헤더를 사용하여,
+한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록
+브라우저에 알려주는 체제입니다. 웹 애플리케이션은 리소스가 자신의 출처(도메인, 프로토콜, 포트)와 다를 때
 교차 출처 HTTP 요청을 실행합니다.**
 ```
 
@@ -93,7 +94,7 @@ Origin '[http://localhost:8080](http://localhost:8080/)' is therefore not allowe
 하지만 위의 조건을 모두 만족하는 경우는 사실 드물다. 일반적으로 `HTTP API` 는 `Content-Type` 으로 `application/json` 타입을 가지도록 설계를 하고, JWT와 같은 토큰 방식의 인증에서는 `Authorization` 헤더를 사용하여 사용자 인증이 진행되는데, 위에서 말한 조건의 헤더에 포함되지 않기 때문이다.
 
 ![simple](https://user-images.githubusercontent.com/49153756/97000918-734fd980-1572-11eb-9906-24fbd3f606bc.png)
-`Simple Request` 는 바로 본 요청을 서버에 보낸 후, 서버의 응답 헤더에 `Access-Control-Allow-Origin` 과 같은 값을 보내주면 그 때 브라우저가 `CORS` 정책의 위반 여부를 검사하는 방식이다. 
+`Simple Request` 는 바로 본 요청을 서버에 보낸 후, 서버의 응답 헤더에 `Access-Control-Allow-Origin` 과 같은 값을 보내주면 그 때 브라우저가 `CORS` 정책의 위반 여부를 검사하는 방식이다.
 
 ### Preflight Request
 
@@ -130,11 +131,12 @@ const response = await fetch(url, {
 
 위와 같이 `fetch API` 의 옵션에 `include` 를 설정해주면 해당 `url` 에 해당하는 쿠키를 함께 보낼 수 있게 된다.  이 경우에 정상적으로 응답을 받기 위해서는 서버 측에서 응답 헤더로 `Access-Control-Allow-Credentials` 에 `true` 값을 넣어주어야 한다. 그렇지 않으면 브라우저는 응답을 거부해 버린다.
 
-또한, `include` 옵션인 경우 어떤 `Origin` 에서 어떤 요청이 왔는지에 대한 정보를 서버가 신뢰하기 위해서   `Access-Control-Allow-Origin` 에 와일드 카드인 `*` 를 사용할 수 없고, 명시적으로 허용할 `Origin` 의 정보를 넣어주어야 한다. 
+![credentialed](https://user-images.githubusercontent.com/49153756/97022531-30e8c580-158f-11eb-8e36-5c72558845e6.png)
+
+또한, `include` 옵션인 경우 어떤 `Origin` 에서 어떤 요청이 왔는지에 대한 정보를 서버가 신뢰하기 위해서   `Access-Control-Allow-Origin` 에 와일드 카드인 `*` 를 사용할 수 없고, 명시적으로 허용할 `Origin` 의 정보를 넣어주어야 한다.
 
 `Express` 의 경우 서버 측에서 다음과 같이 설정할 수 있다. (`cors` 미들웨어를 사용)
-
-- [https://github.com/expressjs/cors](https://github.com/expressjs/cors)
+  - [https://github.com/expressjs/cors](https://github.com/expressjs/cors)
 
 ```jsx
 app.use(
