@@ -72,7 +72,7 @@ expect(0).toBeFalsy();
 
 **`.toBeUndefined()`** : `undefined` 인지 확인
 
-**`.toBeDefined()` : **`.toBeUndefined()`**  의 반대
+**`.toBeDefined()`** : **`.toBeUndefined()`**  의 반대
 
 **`.toHaveLength()` :** 배열의 길이를 확인할 때 사용
 
