@@ -82,6 +82,11 @@ const draw = () => {
 
 ![canvasCurve](https://user-images.githubusercontent.com/49153756/101260485-a9889780-3773-11eb-862d-54fdf335a901.png)
 
+### 로딩 화면
+
+![waveLoading2](https://user-images.githubusercontent.com/49153756/101270909-1fffb680-37c1-11eb-8a15-eb1751ab88a5.gif)
+
+
 > 참조
 >
 > [https://developer.mozilla.org/ko/docs/Web/HTML/Canvas/Tutorial/Drawing_shapes](https://developer.mozilla.org/ko/docs/Web/HTML/Canvas/Tutorial/Drawing_shapes)
