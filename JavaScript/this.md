@@ -90,7 +90,7 @@ obj.func(); // 10
 
 - 기본적으로는 함수 내부에서와 동일
 - 제어권을 가진 함수가 callback의 this를 명시한 경우 그에 따른다.
-- `[call()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/call)` , `[apply()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)`, `[bind()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)` 사용하여 this를 설정할 수 있음
+- [`call()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/call) , [`apply()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/apply), [`bind()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) 사용하여 this를 설정할 수 있음
     - `func.call(thisArg[, arg1[, arg2[, ...]]])`
     - `func.apply(thisArg, [argsArray])`
     - `func.bind(thisArg[, arg1[, arg2[, ...]]])`
