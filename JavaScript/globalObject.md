@@ -1,3 +1,7 @@
+# Global Object(전역 객체)
+
+전역 객체(Global Object)는 모든 객체의 유일한 최상위 객체를 의미하며 일반적으로 `브라우저`에서는 `window`, `Node.js`에서는 `global` 객체를 의미한다.
+
 ### Window
 
 **BOM (Browser Object Model)**
@@ -58,3 +62,5 @@
 > [https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event](https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event)
 >
 > [https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event](https://developer.mozilla.org/ko/docs/Web/API/Window/popstate_event)
+>
+> [https://poiemaweb.com/js-global-object](https://poiemaweb.com/js-global-object)
