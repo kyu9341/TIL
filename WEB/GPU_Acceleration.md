@@ -4,7 +4,7 @@
 
 **브라우저에서 하드웨어 가속은 GPU를 이용하여 CPU의 처리량을 줄이고, 브라우저의 렌더링을 효율화하는 것을 말한다. CSS 작업에 하드웨어 가속을 활성화하면, 작업 처리가 빨라져서 웹페이지의 렌더링을 보다 빠르게 할 수 있다.**
 
-## 프론트엔드 개발자가 GPU를 사용하는 방법
+### 프론트엔드 개발자가 GPU를 사용하는 방법
 
 프론트엔드 개발자가 브라우저 렌더링 시에 GPU를 사용하도록 만드려면 어떻게 해야할까? 이런 내용을 받아들이기 위해서는 먼저 브라우저의 `Layer Model`에 대해 이해해야 할 것 같다.
 
@@ -130,3 +130,5 @@ will-change: transform, opacity;
 > [https://ui.toast.com/fe-guide/ko_PERFORMANCE](https://ui.toast.com/fe-guide/ko_PERFORMANCE)
 >
 > [https://wit.nts-corp.com/2017/08/31/4861](https://wit.nts-corp.com/2017/08/31/4861)
+>
+> [http://sculove.github.io/blog/2013/12/05/animation-for-performance/](http://sculove.github.io/blog/2013/12/05/animation-for-performance/)
