@@ -1,5 +1,7 @@
 # 객체를 `immutable` 하게 사용하는 만드는 방법
 
+객체를 변경 할 수 없게 만드는 방법에는 대표적으로 `Object.freeze()`가 있다. 하지만, 이 방법 외에도 몇 가지 방법들이 있다.
+
 - `const` vs `Object.freeze()`
 
   - `immutable`한 상태를 만드는 방법은 `const`와 `Object.freeze()`가 있는데 둘의 차이를 살펴보면 아래와 같다.
@@ -24,14 +26,30 @@ Object.defineProperty(obj, prop, descriptor);
 
 #### **`descriptor`** 객체에 포함되는 속성
 
-- **`configurable` :** 해당 속성의 값을 변경할 수 있고, 대상 객체에서 삭제할 수도 있다면 `true`
+- **`configurable`** : 해당 속성의 값을 변경할 수 있고, 대상 객체에서 삭제할 수도 있다면 `true`
+  - → `false`가 된다면 `configurable`과 `enumerable`의 플래그를 수정할 수 없고, `writable: false`의 경우 `true`로 바꿀 수 없다. (`true → false`는 가능) `value`는 변경이 가능.
+  - 즉, 해당 속성의 설정 값을 변경할 수 있는지를 관리하는 속성이다.
   - 기본값 : `false`
-- **`enumerable` :** 해당 속성이 대상 객체의 속성 열거 시 노출된다면 `true`
+- **`enumerable`** : 해당 속성이 대상 객체의 속성 열거 시 노출된다면 `true`
   - 기본값 : `false`
-- **`value` :** 속성에 연관된 값. 아무 유효한 JavaScript 값(숫자, 객체, 함수 등)이나 가능
+- **`value`** : 속성에 연관된 값. 아무 유효한 JavaScript 값(숫자, 객체, 함수 등)이나 가능
   - 기본값 : [`undefined`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/undefined)
-- **`writable` :** [할당 연산자(`=`)](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Assignment_Operators)로 속성의 값을 바꿀 수 있다면 `true`
+- **`writable`** : [할당 연산자(`=`)](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Assignment_Operators)로 속성의 값을 바꿀 수 있다면 `true`
   - 기본값 : `false`
+
+#### [`Object.getOwnPropertyDescriptor`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor)
+
+- 객체의 해당 속성의 `descriptor`를 확인 할 수 있다.
+
+```js
+const user1 = {
+  name: 'kwon',
+  age: 26,
+};
+
+console.log(Object.getOwnPropertyDescriptor(user1, 'age'));
+// { value: 26, writable: true, enumerable: true, configurable: true }
+```
 
 ### [`Object.preventExtensions()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
 
@@ -44,6 +62,27 @@ Object.defineProperty(obj, prop, descriptor);
 
 - `[[Extensible]]` 속성을 `false` 로 변경한다.
 
+```js
+const user1 = {
+  name: 'kwon',
+  age: 26,
+};
+
+console.log('Extensible : ', Object.isExtensible(user1));
+// 출력 : Extensible :  true
+Object.preventExtensions(user1);
+
+console.log('Extensible : ', Object.isExtensible(user1));
+// 출력 : Extensible :  false
+
+Object.defineProperty(user1, 'address', {
+  value: 'Seoul',
+});
+// TypeError: Cannot define property address, object is not extensible
+```
+
+`Object.preventExtensions(user1)` 을 통해 내부의 `Extensible` 속성이 `false`로 변경된 모습을 볼 수 있고, 이후에 `Object.defineProperty()`로 새로운 속성을 추가하려고 하면 위와 같은 에러를 발생시키게 된다.
+
 ### [`Object.seal()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
 
 1. 개체의 기존 속성을 변경할 수 있음
@@ -52,6 +91,40 @@ Object.defineProperty(obj, prop, descriptor);
 
 - `[[Extensible]]` 속성을 `false` 로 변경한다.
 - 모든 프로퍼티의 `configurable` 속성을 `false` 로 변경한다.
+
+```js
+const user1 = {
+  name: 'kwon',
+  age: 26,
+};
+
+console.log(Object.getOwnPropertyDescriptor(user1, 'age'));
+// 출력 : { value: 26, writable: true, enumerable: true, configurable: true }
+console.log('Extensible : ', Object.isExtensible(user1));
+// 출력 : Extensible :  true
+
+delete user1.name; // name 속성이 삭제됨
+console.log(user1); // { age: 26 }
+
+Object.seal(user1);
+
+console.log(Object.getOwnPropertyDescriptor(user1, 'age'));
+// 출력 : { value: 26, writable: true, enumerable: true, configurable: false }
+console.log('Extensible : ', Object.isExtensible(user1));
+// 출력 : Extensible :  false
+
+delete user1.age; // 삭제가 안됨
+
+console.log(user1); // { age: 26 }
+
+user1.age = 30;
+
+console.log(user1); // { age: 30 }
+```
+
+`Object.seal()`이 적용된 이후 `Extensible`과 `configurable`이 모두 `false`로 변경된 것을 확인할 수 있다. 또한, `delete` 연산자를 통해 `user1`의 `name`과 `age`를 각각 `Object.seal()` 이전, 이후에 삭제를 시도한 모습인데, `Object.seal()` 이전에 수행된 `name` 속성은 삭제된 반면, 이후에 실행된 `age` 속성은 삭제되지 않은 것을 볼 수 있다.
+
+하지만 `Object.seal()` 이후에도 `writable` 속성이 `true`인 경우에는 객체의 속성은 변경이 가능하다.
 
 ### [`Object.freeze()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
 
@@ -66,9 +139,91 @@ Object.defineProperty(obj, prop, descriptor);
 - 모든 프로퍼티의 `configurable` 속성을 `false` 로 변경한다.
 - 모든 프로퍼티의 `writable` 속성을 `false` 로 변경한다.
 
-즉, `Object.freeze()` 는 `Object.defineProperty()` 와 `Object.preventExtensions()` 로 구현이 가능하다.
+```js
+const user1 = {
+  name: 'kwon',
+  age: 26,
+};
 
-[`Object.defineProperty()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 를 통해 `writable`속성과 `configurable`속성을 `false` 로 변경하고, `Object.preventExtensions()` 를 통해 `[[Extensible]]` 속성을 `false` 로 변경하면 된다.
+console.log(Object.getOwnPropertyDescriptor(user1, 'age'));
+// 출력 : { value: 26, writable: true, enumerable: true, configurable: true }
+console.log('Extensible : ', Object.isExtensible(user1));
+// 출력 : Extensible :  true
+
+delete user1.name; // name 속성이 삭제됨
+console.log(user1); // { age: 26 }
+
+Object.freeze(user1);
+
+console.log(Object.getOwnPropertyDescriptor(user1, 'age'));
+// 출력 : { value: 26, writable: false, enumerable: true, configurable: false }
+console.log('Extensible : ', Object.isExtensible(user1));
+// 출력 : Extensible :  false
+
+delete user1.age; // 삭제가 안됨
+
+console.log(user1); // { age: 26 }
+
+user1.age = 30;
+
+console.log(user1); // { age: 26 }
+```
+
+`Object.seal()`과는 다르게 `Object.freeze()`를 수행하고 나면, `writable`이 `false`로 변경되고 이후 객체의 속성을 수정해도 변경되지 않는 것을 볼 수 있다.
+
+또한, `Object.freeze()` 는 `Object.defineProperty()` 와 `Object.preventExtensions()` 로 구현이 가능하다.
+
+```js
+const _freeze = function (obj) {
+  Object.keys(obj).forEach(key => {
+    Object.defineProperty(obj, key, {
+      configurable: false,
+      writable: false,
+    });
+  });
+
+  Object.preventExtensions(obj);
+};
+```
+
+위와 같이 [`Object.defineProperty()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 를 통해 `writable`속성과 `configurable`속성을 `false` 로 변경하고, `Object.preventExtensions()` 를 통해 `[[Extensible]]` 속성을 `false` 로 변경하면 된다.
+
+하지만, `Object.freeze()`만으로는 객체 내부의 객체까지는 변경을 막을 수 없다. 이를 막으려면 `deepFreeze`를 구현해야 하는데, 아래와 같은 방법으로 구현할 수 있다.
+
+### `deepFreeze`
+
+- `Object.freeze()` 사용
+
+```js
+const deepFreeze = function (obj) {
+  if (obj === null || typeof obj !== 'object') return;
+
+  Object.keys(obj).forEach(key => {
+    deepFreeze(obj[key]);
+  });
+
+  Object.freeze(obj);
+};
+```
+
+- `Object.defineProperty() + Object.preventExtensions()` 사용
+
+```js
+const deepFreeze = function (obj) {
+  if (obj === null || typeof obj !== 'object') return;
+
+  Object.keys(obj).forEach(key => {
+    Object.defineProperty(obj, key, {
+      configurable: false,
+      writable: false,
+    });
+
+    deepFreeze(obj[key]);
+  });
+
+  Object.preventExtensions(obj);
+};
+```
 
 ### 비교
 
@@ -81,6 +236,7 @@ Object.defineProperty(obj, prop, descriptor);
 |     기존 속성 변경(`writable`)     |    ⭕️    |         ⭕️         |  ⭕️   |    ❌    |
 
 > 참조
+>
 > [https://stackoverflow.com/questions/6281314/object-preventextensions-actually-allows-mutation-of-proto](https://stackoverflow.com/questions/6281314/object-preventextensions-actually-allows-mutation-of-proto)
 >
 > [https://velog.io/@kdo0129/객체-잠그기](https://velog.io/@kdo0129/%EA%B0%9D%EC%B2%B4-%EC%9E%A0%EA%B7%B8%EA%B8%B0)
