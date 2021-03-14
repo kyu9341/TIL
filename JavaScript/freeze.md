@@ -1,4 +1,4 @@
-# 객체를 `immutable` 하게 사용하는 만드는 방법
+# 객체를 `immutable` 하게 만드는 방법
 
 객체를 변경 할 수 없게 만드는 방법에는 대표적으로 `Object.freeze()`가 있다. 하지만, 이 방법 외에도 몇 가지 방법들이 있다.
 
@@ -234,6 +234,8 @@ const deepFreeze = function (obj) {
 | 새로운 속성 추가(`[[Extensible]]`) |    ⭕️    |         ⭕️         |   ❌   |    ❌    |
 |   기존 속성 삭제(`configurable`)   |    ⭕️    |         ⭕️         |   ❌   |    ❌    |
 |     기존 속성 변경(`writable`)     |    ⭕️    |         ⭕️         |  ⭕️   |    ❌    |
+
+---
 
 > 참조
 >
