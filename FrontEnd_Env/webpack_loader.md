@@ -116,20 +116,20 @@ npm i -D babel-loader @babel/core @babel/preset-env
 - `@babel/preset-env` : 브라우저에 필요한 `ECMAScript` 버전을 자동으로 파악해서 알아서 `polyfill`을 넣어준다.
 
 ```jsx
-module: {
+  module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env'],
           },
         },
       },
-    ]
-	},
+    ],
+  },
 ```
 
 ### `file-loader`
