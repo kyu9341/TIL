@@ -16,6 +16,7 @@ Today I Learned
 ## 🏝 TypeScript
 
 - [타입 단언 / 타입 추론](https://github.com/kyu9341/TIL/blob/main/TypeScript/TypeInference_TypeAssertion.md)
+- [`type` / `interface`](https://github.com/kyu9341/TIL/blob/main/TypeScript/InterfaceVsTypeAlias.md)
 
 ## 🌻 React
 
