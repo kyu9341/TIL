@@ -35,6 +35,7 @@ Today I Learned
 ## 🌵 FrontEnd 개발환경
 
 - [`webpack → Loader`](https://github.com/kyu9341/TIL/blob/main/FrontEnd_Env/webpack_loader.md)
+- [`webpack → Plugin`](https://github.com/kyu9341/TIL/blob/main/FrontEnd_Env/webpack_plugin.md)
 
 ## 🌹 CSS
 
