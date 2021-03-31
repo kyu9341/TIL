@@ -24,7 +24,13 @@ module.exports = {
       },
     ],
   },
-  plugins: [new MyPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+    new CleanWebpackPlugin(),
+    new MyPlugin(),
+  ],
   devServer: {
     port: 8080,
     historyApiFallback: true,
