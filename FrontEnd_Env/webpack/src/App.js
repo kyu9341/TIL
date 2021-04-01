@@ -8,7 +8,7 @@ class App {
   render() {
     this.$root.innerHTML = `<h1> Hello World! </h1>`;
 
-    console.log('loader');
+    console.log(`SERVICE_URL: ${SERVICE_URL}`);
   }
 }
 
