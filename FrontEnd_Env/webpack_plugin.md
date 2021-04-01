@@ -143,6 +143,65 @@ console.log(`SERVICE_URL: ${SERVICE_URL}`);
 
 위와 같이 번들 파일을 보면 해당 문자열로 치환되어 있는 모습을 볼 수 있다.
 
+### `MiniCssExtractPlugin`
+
+`MiniCssExtractPlugin` 은 `CSS`를 별도의 번들링된 `CSS` 파일로 추출하게 해주는 플러그인이다.
+
+```
+npm install -D mini-css-extract-plugin
+```
+
+`development` 모드에서는 굳이 적용하지 않아도 되니(빌드 속도가 느려질 수 있음) `production` 모드인 경우에만 사용하도록 설정을 추가해보자.
+
+```tsx
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    ...(process.env.NODE_ENV === 'production'
+      ? [new MiniCssExtractPlugin({ filename: `[name].css` })]
+      : []),
+  ],
+};
+```
+
+- `filename` 에 설정한 값으로 `output` 경로에 `CSS` 파일이 생성된다.
+
+`MiniCssExtractPlugin` 을 사용하려면 `style-loader` 대신 `MiniCssExtractPlugin` 에서 제공하는 로더를 사용해야 한다. 로더도 마찬가지로 `production` 환경에서만 사용하도록 설정을 추가하자.
+
+```tsx
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/,
+        use: [
+          process.env.NODE_ENV === 'production'
+            ? MiniCssExtractPlugin.loader // production mode
+            : 'style-loader', // development mode
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+};
+```
+
+<img width="149" alt="Screen Shot 2021-04-02 at 01 15 36 AM" src="https://user-images.githubusercontent.com/49153756/113326860-31169980-9355-11eb-9d3e-6c74fb6aa52d.png">
+
+위와 같이 설정 후 `production` 모드로 빌드하게 되면 `main.css` 파일로 분리되어 번들링되는 것을 확인할 수 있다. 만약 모드 설정이 적용되지 않는다면 아래와 같이 `CLI`에서 추가해보자.
+
+- `package.json`
+
+```json
+"scripts": {
+    "start": "webpack serve --open --config webpack.config.js",
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "dev": "NODE_ENV=development webpack --config webpack.config.js",
+  },
+```
+
 ---
 
 > 참고
@@ -158,3 +217,5 @@ console.log(`SERVICE_URL: ${SERVICE_URL}`);
 > [https://www.daleseo.com/webpack-plugins-define-environment/](https://www.daleseo.com/webpack-plugins-define-environment/)
 >
 > [https://webpack.js.org/plugins/define-plugin/](https://webpack.js.org/plugins/define-plugin/)
+>
+> [https://velog.io/@cckn/windows%EC%97%90%EC%84%9C-NODEENV%EB%A5%BC-%EB%B0%94%EA%BF%80-%EB%95%8C%EC%97%90%EB%8A%94-cross-env%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90](https://velog.io/@cckn/windows%EC%97%90%EC%84%9C-NODEENV%EB%A5%BC-%EB%B0%94%EA%BF%80-%EB%95%8C%EC%97%90%EB%8A%94-cross-env%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90)
