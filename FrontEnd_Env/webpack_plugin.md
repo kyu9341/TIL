@@ -78,6 +78,71 @@ module.exports = {
 };
 ```
 
+### `BannerPlugin`
+
+번들 결과물에 빌드 정보나 커밋 버전 등을 추가할 수 있는 플러그인이다. 웹팩에서 기본으로 제공해준다.
+
+```tsx
+const webpack = require('webpack');
+const childProcess = require('child_process');
+
+module.exports = {
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: `
+      Build Date: ${new Date().toLocaleString()}
+      Commit Version: ${childProcess.execSync('git rev-parse --short HEAD')}
+      `,
+    }),
+  ],
+};
+```
+
+- `banner` 속성에 문자열이나 함수를 전달할 수 있다. 함수로 전달하는 경우 반환 값이 들어가게 된다.
+- `child_process.execSync(command[, options])`
+  - 자식 프로세스를 생성하여 CLI 명령을 동기로 실행시킨다.
+  - 현재 커밋 버전을 받아오기 위해 사용
+- 결과 (`main.js`)
+
+```tsx
+/*!
+ *
+ *       Build Date: 2021-4-1 4:50:57 ├F10: PM┤
+ *       Commit Version: 0d06062
+ *
+ *
+ */
+```
+
+### `DefinePlugin`
+
+`DefinePlugin` 도 `BannerPlugin` 과 마찬가지로 웹팩에서 제공해주는 플러그인이므로 따로 설치가 필요 없다.
+
+`DefinePlugin` 은 빌드 타임에만 사용할 전역 변수를 생성해주는 플러그인이다. 주로 `development` 모드와 `production` 모드를 구분하여 다른 동작을 수행하게 할 때 사용된다.
+
+```tsx
+const webpack = require('webpack');
+
+module.exports = {
+  plugins: [
+    new webpack.DefinePlugin({
+      TWO: '1+1',
+      SERVICE_URL: JSON.stringify('https://dev.example.com'),
+    }),
+  ],
+};
+```
+
+직접 코드의 형태로 문자열을 넣기 때문에 (ex: `TWO: '1+1'` 을 넣으면 `2` 로 계산되어 할당됨) `string` 형의 데이터로 사용하고 싶다면 `'"1+1"'` 처럼 사용하거나, `JSON.stringify('1+1')` 와 같이 사용해야 한다.
+
+```tsx
+console.log(`SERVICE_URL: ${SERVICE_URL}`);
+```
+
+<img width="514" alt="Screen Shot 2021-04-01 at 18 06 58 PM" src="https://user-images.githubusercontent.com/49153756/113272109-3f919080-9316-11eb-8e14-6d029023a72a.png">
+
+위와 같이 번들 파일을 보면 해당 문자열로 치환되어 있는 모습을 볼 수 있다.
+
 ---
 
 > 참고
@@ -89,3 +154,7 @@ module.exports = {
 > [https://howdy-mj.me/node/webpack-basic-2/](https://howdy-mj.me/node/webpack-basic-2/)
 >
 > [https://infoscis.github.io/2018/01/24/develop-webpack-plugin/](https://infoscis.github.io/2018/01/24/develop-webpack-plugin/)
+>
+> [https://www.daleseo.com/webpack-plugins-define-environment/](https://www.daleseo.com/webpack-plugins-define-environment/)
+>
+> [https://webpack.js.org/plugins/define-plugin/](https://webpack.js.org/plugins/define-plugin/)
