@@ -29,7 +29,7 @@ Today I Learned
 - [하드웨어 가속](https://github.com/kyu9341/TIL/blob/main/WEB/GPU_Acceleration.md)
 - [`GitHub OAuth`](https://github.com/kyu9341/TIL/blob/main/WEB/GitHub_OAuth.md)
 - [`IntersectionObserver`](https://github.com/kyu9341/TIL/blob/main/WEB/IntersectionObserver.md)
-- [`canvas`](https://github.com/kyu9341/TIL/blob/main/css/animation.md)
+- [`canvas`](https://github.com/kyu9341/TIL/blob/main/canvas/canvas.md)
 - [`svg`](https://github.com/kyu9341/TIL/blob/main/svg/svg.md)
 
 ## 🌵 FrontEnd 개발환경
