@@ -12,6 +12,7 @@ Today I Learned
 - [`null` vs `undefined`](https://github.com/kyu9341/TIL/blob/main/JavaScript/nullVsUndefined.md)
 - [객체 순회](https://github.com/kyu9341/TIL/blob/main/JavaScript/object.md)
 - [`this`](https://github.com/kyu9341/TIL/blob/main/JavaScript/this.md)
+- [정규표현식](https://github.com/kyu9341/TIL/blob/main/JavaScript/regex.md)
 
 ## 🏝 TypeScript
 
