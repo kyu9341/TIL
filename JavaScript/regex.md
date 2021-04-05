@@ -111,6 +111,41 @@ const regx = new RegExp('a+');
   - → `/(?<!ab)c/`
   - 앞의 패턴에 일치하지 않는 문자열을 찾는다.
 
+### Example
+
+- 전화번호, 이메일 유효성 검사
+
+```tsx
+const phoneRegex = /\d{2,3}[-. ]\d{3,4}[-. ]\d{4}/;
+const emailRegex = /[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]+/;
+
+const checkPhone = phone => phoneRegex.test(phone);
+const checkEmail = email => emailRegex.test(email);
+
+const cases = [
+  '010-1234-5678',
+  '1-33-4455',
+  '02-335-4455',
+  '011-334-4455',
+  '010 1111 2222',
+  '010.1111.2222',
+  '010=1111=2222',
+  '010-1111-2222',
+  'kwon@naver.com',
+  'kim@gmail.com',
+  'jo@gmail.co.kr',
+  'yeongeon.kwon@naver.com',
+];
+
+cases.forEach(val => {
+  console.log(`phone - ${val} : ${checkPhone(val)}`);
+});
+
+cases.forEach(val => {
+  console.log(`email - ${val} : ${checkEmail(val)}`);
+});
+```
+
 ---
 
 > 참고
