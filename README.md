@@ -4,6 +4,7 @@ Today I Learned
 
 ## 🏜 JavaScript
 
+- [Promise](https://github.com/kyu9341/TIL/blob/main/JavaScript/promise.md)
 - [실행 컨텍스트](https://github.com/kyu9341/TIL/blob/main/JavaScript/executionContext.md)
 - [`immutable`과 `mutable`](https://github.com/kyu9341/TIL/blob/main/JavaScript/immutable.md)
 - [객체를 `immutable` 하게 만드는 방법](https://github.com/kyu9341/TIL/blob/main/JavaScript/freeze.md)
