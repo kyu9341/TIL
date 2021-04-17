@@ -23,7 +23,7 @@ const draw = () => {
     ctx.clearRect(45, 45, 60, 60);
     ctx.strokeRect(50, 50, 50, 50);
   }
-}
+};
 ```
 
 ### 경로
@@ -33,14 +33,15 @@ const draw = () => {
 1. 경로를 생성한다.
 2. 그리기 명령어를 사용하여 경로상에 그린다.
 3. 경로가 한 번 만들어졌다면, 경로를 렌더링하기 위해 윤곽선을 그리거나 도형 내부를 채울 수 있다.
+
 - `beginPath()` : 새로운 경로를 만든다. 경로가 생성됐다면, 이 후 그리기 명령들은 경로를 구성하고 만드는데 사용한다.
-    - 이 메소드가 호출될 때마다, 하위 경로의 모음은 초기화되고 새로운 도형을 그릴 수 있게 된다.
-    - 현재 열린 path가 비어있는 경우 ( `beginPath()` 메소드를 사용한 직 후, 혹은캔버스를 새로 생성한 직후), 첫 경로 생성 명령은 실제 동작에 상관 없이 `moveTo()` 로 여겨지게 된다. 그렇기 때문에 경로를 초기화한 직후에는 항상 명확하게 시작 위치를 설정해 두는것이 좋다.
+  - 이 메소드가 호출될 때마다, 하위 경로의 모음은 초기화되고 새로운 도형을 그릴 수 있게 된다.
+  - 현재 열린 path가 비어있는 경우 ( `beginPath()` 메소드를 사용한 직 후, 혹은캔버스를 새로 생성한 직후), 첫 경로 생성 명령은 실제 동작에 상관 없이 `moveTo()` 로 여겨지게 된다. 그렇기 때문에 경로를 초기화한 직후에는 항상 명확하게 시작 위치를 설정해 두는것이 좋다.
 - `closePath()` : 현재 하위 경로의 시작 부분과 연결된 직선을 추가한다.
-    - 현재 점 위치와 시작점 위치를 직선으로 이어서 도형을 닫는다.
+  - 현재 점 위치와 시작점 위치를 직선으로 이어서 도형을 닫는다.
 - `stroke()` : 윤곽선을 이요하여 도형을 그린다.
 - `fill()` : 경로의 내부를 채워서 내부가 채워진 도형을 그린다.
-    - `fill()` 호출 시 열린 도형은 자동으로 닫히게 된다.
+  - `fill()` 호출 시 열린 도형은 자동으로 닫히게 된다.
 
 ex) 삼각형 그리기
 
@@ -56,19 +57,19 @@ const draw = () => {
     ctx.lineTo(100, 25);
     ctx.fill();
   }
-}
+};
 ```
 
 ### 펜(pen)이동
 
 - `moveTo(x, y)` : 펜을 (x, y) 좌표로 이동시킨다.
-    - 실제로 어떤 것도 그리지 않고, 펜을 종이 위에서 들어 옆으로 옮기는 것이라고 생각하면 된다.
-    - 캔버스가 초기화 되었거나 `beginPath()` 메소드가 호출되었을 때, 특정 시작점을 위해 `moveTo()` 함수를 사용하는 것이 좋다.
+  - 실제로 어떤 것도 그리지 않고, 펜을 종이 위에서 들어 옆으로 옮기는 것이라고 생각하면 된다.
+  - 캔버스가 초기화 되었거나 `beginPath()` 메소드가 호출되었을 때, 특정 시작점을 위해 `moveTo()` 함수를 사용하는 것이 좋다.
 
 ### 선
 
 - `lineTo(x, y)` : 현재의 드로잉 위치에서 x와 y로 지정된 위치까지 선을 그린다.
-    - 이 메소드는 선의 끝점의 좌표가 되는 x, y 인자를 받는다. 시작점은 이전에 그려진 경로에 의해 결정되고 이전 경로의 끝점이 다음 경로의 시작점이 된다. 시작점은 `moveTo()` 에 의해 변경될 수 있다.
+  - 이 메소드는 선의 끝점의 좌표가 되는 x, y 인자를 받는다. 시작점은 이전에 그려진 경로에 의해 결정되고 이전 경로의 끝점이 다음 경로의 시작점이 된다. 시작점은 `moveTo()` 에 의해 변경될 수 있다.
 
 ### 호
 
@@ -82,10 +83,45 @@ const draw = () => {
 
 ![canvasCurve](https://user-images.githubusercontent.com/49153756/101260485-a9889780-3773-11eb-862d-54fdf335a901.png)
 
+### 스타일 및 색
+
+- **[`fillStyle = color`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)** : 도형을 채우는 색을 설정
+- **[`strokeStyle = color`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle)** : 도형의 윤곽선 색을 설정
+
+```jsx
+ctx.fillStyle = color;
+ctx.fillStyle = gradient;
+ctx.fillStyle = pattern;
+
+ctx.strokeStyle = color;
+ctx.strokeStyle = gradient;
+ctx.strokeStyle = pattern;
+
+ctx.fillStyle = 'orange';
+ctx.fillStyle = '#FFA500';
+ctx.fillStyle = 'rgb(255, 165, 0)';
+ctx.fillStyle = 'rgba(255, 165, 0, 1)';
+```
+
+`strokeStyle` 또는 `fillStyle` 속성을 설정하면, 새로 설정된 값이 앞으로 그려질 도형의 기본 값이 된다. 각 도형에 다른 색을 적용하려면 `fillStyle` 또는 `strokeStyle` 속성을 다시 적용해야 한다.
+
+### 선 모양 설정
+
+- [`lineWidth`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth) : 이후 그려질 선의 두께를 설정
+- [`lineCap`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap) : 선의 끝 모양을 결정
+- [`lineJoin`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin) : 선들이 만나는 모서리의 모양을 설정
+- [`miterLimit`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit) : 두 선이 예각으로 만날 때 접합점의 두께를 제어할 수 있도록, 연결부위의 크기를 제한하는 값을 설정
+- [`getLineDash()`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getLineDash) : 음수가 아닌 짝수를 포함하는 현재 선의 대시 패턴 배열을 반환
+- [`setLineDash(segments)`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash) : 현재 선의 대시 패턴을 설정
+- [`lineDashOffset`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset) : 선의 대시 배열이 어디서 시작될지 지정
+
 ### 로딩 화면
 
 ![waveLoading2](https://user-images.githubusercontent.com/49153756/101270909-1fffb680-37c1-11eb-8a15-eb1751ab88a5.gif)
 
+---
+
+- `canvas` - `line width` -> <https://stackoverflow.com/questions/7530593/html5-canvas-and-line-width/7531540#7531540>
 
 > 참조
 >
