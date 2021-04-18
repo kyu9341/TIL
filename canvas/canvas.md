@@ -83,6 +83,32 @@ const draw = () => {
 
 ![canvasCurve](https://user-images.githubusercontent.com/49153756/101260485-a9889780-3773-11eb-862d-54fdf335a901.png)
 
+### 텍스트
+
+- **[`fillText(text, x, y [, maxWidth])`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillText) :** 주어진 `(x, y)` 위치에 주어진 텍스트를 채움
+  - 최대 폭(`width`)은 옵션 값
+- **[`strokeText(text, x, y [, maxWidth])`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeText) :** 주어진 `(x, y)` 위치에 주어진 텍스트를 `stroke`
+  - 최대 폭(`width`)은 옵션 값
+
+### 텍스트 스타일
+
+- **[`font = value`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font) :** 텍스트를 그릴 때 사용되는 현재 텍스트 스타일
+  - 해당 문자열은 css의 [`font`](https://developer.mozilla.org/ko/docs/Web/CSS/font) 프로퍼티와 동일한구문을 사용
+  - 기본값 : `sans-serif`, `10px`
+- **[`textAlign = value`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textAlign) :** 텍스트 정렬 설정
+
+  <img width="243" alt="text" src="https://user-images.githubusercontent.com/49153756/115140511-a7fca380-a072-11eb-8d20-1888132cc898.png">
+
+- 사용가능한 값: `start`, `end`, `left`, `right`, `center`
+- 기본 값은 `start`
+
+- **[`textBaseline = value`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline) :** 베이스라인 정렬 설정
+  - 사용가능한 값 : `top`, `hanging`, `middle`, `alphabetic`, `ideographic`, `bottom`
+  - 기본 값은 `alphabetic`
+- **[`direction = value`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction) :** 글자 방향
+  - 사용가능한 값: `ltr`, `rtl`, `inherit`
+  - 기본 값은 `inherit`
+
 ### 스타일 및 색
 
 - **[`fillStyle = color`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)** : 도형을 채우는 색을 설정
@@ -108,6 +134,10 @@ ctx.fillStyle = 'rgba(255, 165, 0, 1)';
 ### 선 모양 설정
 
 - [`lineWidth`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth) : 이후 그려질 선의 두께를 설정
+  <img width="474" alt="lineWidth" src="https://user-images.githubusercontent.com/49153756/115140510-a632e000-a072-11eb-8513-7ee4137338f0.png">
+
+  - [참고1](https://stackoverflow.com/questions/7530593/html5-canvas-and-line-width/7531540#7531540), [참고2](https://stackoverflow.com/questions/13879322/drawing-a-1px-thick-line-in-canvas-creates-a-2px-thick-line)
+
 - [`lineCap`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap) : 선의 끝 모양을 결정
 - [`lineJoin`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin) : 선들이 만나는 모서리의 모양을 설정
 - [`miterLimit`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit) : 두 선이 예각으로 만날 때 접합점의 두께를 제어할 수 있도록, 연결부위의 크기를 제한하는 값을 설정
@@ -120,8 +150,6 @@ ctx.fillStyle = 'rgba(255, 165, 0, 1)';
 ![waveLoading2](https://user-images.githubusercontent.com/49153756/101270909-1fffb680-37c1-11eb-8a15-eb1751ab88a5.gif)
 
 ---
-
-- `canvas` - `line width` -> <https://stackoverflow.com/questions/7530593/html5-canvas-and-line-width/7531540#7531540>
 
 > 참조
 >
