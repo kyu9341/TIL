@@ -46,3 +46,8 @@ Today I Learned
 ## 🧪 TEST
 
 - [`jest`](https://github.com/kyu9341/TIL/blob/main/jest/jest.md)
+
+## 🌌 DesignPattern
+
+- [`MV*`](https://github.com/kyu9341/TIL/blob/main/DesignPattern/MV*/MV*.md)
+- [`StrategyPattern`](https://github.com/kyu9341/TIL/blob/main/DesignPattern/StrategyPattern/StrategyPattern.md)
