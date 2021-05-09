@@ -45,7 +45,7 @@ Today I Learned
 
 ## 🧪 TEST
 
-- [`jest`](https://github.com/kyu9341/TIL/blob/main/jest/jest.md)
+- [`jest`](https://github.com/kyu9341/TIL/blob/main/Test/jest/jest.md)
 
 ## 🌌 DesignPattern
 
