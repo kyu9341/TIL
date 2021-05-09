@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { observer, Provider } from 'mobx-react';
 import Counter from './Counter';
+import Reaction from './Reaction';
+// import Observable from './Observable';
 import CounterStore from './CounterStore';
 import {
   observable,
@@ -10,6 +12,7 @@ import {
   configure,
   autorun,
   comparer,
+  reaction,
   when,
 } from 'mobx';
 
@@ -19,41 +22,7 @@ const observableMap = observable.map({ key1: 'aa' });
 configure({
   computedRequiresReaction: true,
 });
-/* 
 
-const num = observable.box(1);
-console.log(num.get());
-
-class OrderLine {
-  @observable price = 0;
-  @observable amount = 1;
-
-  constructor(price) {
-    this.price = price;
-    // When computed total changes
-    // cache value to this.total
-    autorun(() => {
-      this.total = this.computedTotal;
-    });
-  }
-
-  @computed({ keepAlive: true }) get computedTotal() {
-    console.log('run');
-    return this.price * this.amount;
-  }
-}
-
-const Ol = new OrderLine(2.0);
-
-setInterval(() => {
-  console.log(Ol.total);
-}, 1000);
-
-setTimeout(() => {
-  Ol.price = 10;
-}, 5000);
-
- */
 class Ticker {
   @observable tick = 0;
 
@@ -81,16 +50,11 @@ when(
 @observer
 class App extends React.Component {
   componentDidMount() {
-    // observableMap.set('key1', 'value1');
-    // observableMap.delete('key1');
-    // console.log('componentDidMount');
-    // console.log(arr.slice());
     // arr.push(5);
     // arr[4] = 6;
   }
 
   render() {
-    console.log('render', arr.slice());
     return (
       <div>
         <p>React here!</p>
@@ -110,6 +74,8 @@ class App extends React.Component {
           bbb
         </button>
         <Counter />
+        <Reaction />
+        {/* <Observable /> */}
       </div>
     );
   }
