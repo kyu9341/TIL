@@ -23,6 +23,8 @@ Today I Learned
 ## 🌻 React
 
 - [`virtual DOM`](https://github.com/kyu9341/TIL/blob/main/React/virtualDOM.md)
+- [`class component`](https://github.com/kyu9341/TIL/blob/main/React/classComponent.md)
+- [`mobx`](https://github.com/kyu9341/TIL/blob/main/React/Mobx/mobx.md)
 
 ## ❄️ WEB
 
@@ -47,6 +49,7 @@ Today I Learned
 
 - [`jest`](https://github.com/kyu9341/TIL/blob/main/Test/jest/jest.md)
 - [`mocha`](https://github.com/kyu9341/TIL/tree/main/Test/mocha)
+- [`sinon`](https://github.com/kyu9341/TIL/tree/main/Test/sinon)
 
 ## 🌌 DesignPattern
 
