@@ -31,9 +31,17 @@
 
 ## [Stubs](https://sinonjs.org/releases/v10.0.1/stubs/)
 
-`test stubs`은 사전에 프로그래밍 된 동작이있는 함수(spy)이다. stub의 동작을 변경하는 데에 사용할 수있는 메서드 외에도 전체 [test spy API](https://sinonjs.org/releases/v10.0.1/spies) 를 지원한다. spy로서 stub은 익명으로 사용되거나 기존 함수를 wrapping할 수 있습니다. stub으로 기존 함수를 wrapping할 때 원래 함수는 호출되지 않는다.
+`test stubs`은 사전에 프로그래밍 된 동작이있는 함수(`spy`)이다. `stub`의 동작을 변경하는 데에 사용할 수있는 메서드 외에도 전체 [test spy API](https://sinonjs.org/releases/v10.0.1/spies) 를 지원한다. `spy`로서 `stub`은 익명으로 사용되거나 기존 함수를 wrapping할 수 있습니다. `stub`으로 기존 함수를 wrapping할 때 원래 함수는 호출되지 않는다.
 
-- 시간이 오래 걸리는 작업 또는 외부에서 데이터를 가져와야 하는 경우 등의 환경에서 미리 응답값을 정의해서 해당 메소드가 동작을 한 것처럼 조작이 가능하다.
+시간이 오래 걸리는 작업 또는 외부에서 데이터를 가져와야 하는 경우 등의 환경에서 미리 응답값을 정의해서 해당 메소드가 동작을 한 것처럼 조작이 가능하다.
+
+- **`const stub = sinon.stub();`** : 익명의 스텁 함수를 생성
+- **`const stub = sinon.stub(object, "method");`** : `object.method`를 스텁 함수로 대체한다. 해당 속성이 `function`이 아니라면 예외를 던진다.
+  - 원래의 함수는 `object.mothod.restore()` 또는 `stub.restore()` 를 호출함으로써 복구할 수 있다.
+- **`const stub = sinon.stub(obj)`** : 객체의 모든 메서드를 스텁한다.
+  - 일반적으로 객체의 메서드를 개별적으로 스텁하는 것이 더 좋지만, 모든 메서드를 이해하거나 제어하기 어려운 객체(ex: library dependencies) 등에서 사용하기에는 좋다.
+- `stub.returns(obj)` : 스텁이 제공된 값을 반환하게 만든다.
+- `stub.callsFake(fakeFunction)` : 스텁을 `fakeFunction`처럼 동작하도록 만든다.
 
 ## [Mocks](https://sinonjs.org/releases/v10.0.1/mocks/)
 
@@ -48,7 +56,9 @@ Mocks는 사전에 프로그래밍된 동작(stub)과 pre-programmed expectation
 
 ### [Sandboxes](https://sinonjs.org/releases/v10.0.1/sandbox/)
 
-- 추가 예정..
+- 샌드 박스는 생성된 모든 fake를 추적 할 필요가 없으므로 정리가 크게 간소화된다.
+- **`const sandbox = sinon.createSandbox()`** : `spies`, `stubs`, `mocks` 등을 사용하여 새로운 `sandbox` 객체를 생성한다.
+- `sandbox.restore()` : `sandbox`를 통해 생성된 모든 `fake`를 복구한다.
 
 > 참고
 >
