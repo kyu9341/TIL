@@ -48,8 +48,9 @@ Today I Learned
 ## 🧪 TEST
 
 - [`jest`](https://github.com/kyu9341/TIL/blob/main/Test/jest/jest.md)
-- [`mocha`](https://github.com/kyu9341/TIL/tree/main/Test/mocha)
-- [`sinon`](https://github.com/kyu9341/TIL/tree/main/Test/sinon)
+- [`mocha`](https://github.com/kyu9341/TIL/tree/main/Test/mocha/mocha.md)
+- [`chai`](https://github.com/kyu9341/TIL/tree/main/Test/mocha/chai.md)
+- [`sinon`](https://github.com/kyu9341/TIL/tree/main/Test/sinon/sinon.md)
 
 ## 🌌 DesignPattern
 
