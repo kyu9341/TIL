@@ -62,3 +62,4 @@ Today I Learned
 ## 🐙 Git
 
 - [`reset`](https://github.com/kyu9341/TIL/blob/main/Git/reset.md)
+- [`rebase`](https://github.com/kyu9341/TIL/blob/main/Git/rebase.md)
