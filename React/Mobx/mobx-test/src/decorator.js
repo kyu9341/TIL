@@ -17,7 +17,9 @@ class Car {
 
 let car = new Car();
 car.color = 'red';
-car.color;
+const a = car.color;
+
+// console.log(car);
 
 /* Result (console)
 set color red

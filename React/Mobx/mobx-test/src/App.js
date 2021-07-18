@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import decorator from './decorator';
+import person from './person';
 
 const App = () => {
   return (

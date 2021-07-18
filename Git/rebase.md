@@ -129,6 +129,8 @@ Once you’re satisfied with your changes, run
 - `exec` - 쉘 명령을 실행한다
 - `drop` - 커밋을 히스토리에서 삭제한다
 
+> 참고
+>
 > [https://flyingsquirrel.medium.com/git-rebase-하는-방법-ce6816fa859d](https://flyingsquirrel.medium.com/git-rebase-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-ce6816fa859d)
 >
 > [https://blog.outsider.ne.kr/666](https://blog.outsider.ne.kr/666)
