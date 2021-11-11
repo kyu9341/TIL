@@ -63,3 +63,4 @@ Today I Learned
 
 - [`reset`](https://github.com/kyu9341/TIL/blob/main/Git/reset.md)
 - [`rebase`](https://github.com/kyu9341/TIL/blob/main/Git/rebase.md)
+- [`stash`](https://github.com/kyu9341/TIL/blob/main/Git/stash.md)
