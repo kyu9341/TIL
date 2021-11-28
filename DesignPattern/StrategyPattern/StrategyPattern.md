@@ -19,13 +19,13 @@ class SearchStrategyAll implements SearchStrategy {
 
 class SearchStrategyImage implements SearchStrategy {
   search() {
-    console.log('SEARCH ALL');
+    console.log('SEARCH IMAGE');
   }
 }
 
 class SearchStrategyVideo implements SearchStrategy {
   search() {
-    console.log('SEARCH ALL');
+    console.log('SEARCH VIDEO');
   }
 }
 ```
