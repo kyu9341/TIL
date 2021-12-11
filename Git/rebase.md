@@ -129,6 +129,55 @@ Once you’re satisfied with your changes, run
 - `exec` - 쉘 명령을 실행한다
 - `drop` - 커밋을 히스토리에서 삭제한다
 
+---
+
+### `commit` 한 `author(user)` 변경하기
+
+- git user 설정
+
+```
+git config --global user.name 계정
+git config --global user.email 이메일
+```
+
+특정 repository만 user를 다르게 설정하고 싶다면 `--global` 플래그를 빼고 수정하면 된다.
+
+- `author`를 바꿀 `commit` 지정
+
+`rebase`를 사용하여 `author`를 바꿀 커밋을 선택한다. 뒤에서 3개의 커밋 중에 선택하고 싶다면
+
+`git rebase -i HEAD~3` 과 같이 명령을 입력한다.
+
+```
+pick f7f3f6d changed my name a bit
+pick 310154e updated README formatting and added blame
+edit a5f4a0d added cat-file
+```
+
+변경하고 싶은 커밋에 `pick → edit(e)`로 변경하고 저장(`wq`)한다.
+
+- 변경할 `author` 입력
+
+`git commit --amend --author="아이디 <이메일>"` 와 같은 형태로 커밋 메세지를 수정
+
+```
+git commit --amend --author="user <email@naver.com>"
+```
+
+위와 같이 변경할 `author`를 입력하고 `rebase`를 이어서 진행한다.
+
+```
+git rebase --continue
+```
+
+이 과정을 반복하여 원하는 커밋의 `author`를 모두 변경하였다면 `force push`를 진행하여 반영해주면 된다.
+
+```
+git push -f origin master
+```
+
+---
+
 > 참고
 >
 > [https://flyingsquirrel.medium.com/git-rebase-하는-방법-ce6816fa859d](https://flyingsquirrel.medium.com/git-rebase-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-ce6816fa859d)
@@ -146,3 +195,5 @@ Once you’re satisfied with your changes, run
 > [https://git-scm.com/book/ko/v2/Git-도구-히스토리-단장하기#\_changing_multiple](https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-%ED%9E%88%EC%8A%A4%ED%86%A0%EB%A6%AC-%EB%8B%A8%EC%9E%A5%ED%95%98%EA%B8%B0#_changing_multiple)
 >
 > [https://gamsungcoding.tistory.com/entry/Git-Git-Advanced-Rebase-i-활용법](https://gamsungcoding.tistory.com/entry/Git-Git-Advanced-Rebase-i-%ED%99%9C%EC%9A%A9%EB%B2%95)
+> 
+> https://korband.tistory.com/34
