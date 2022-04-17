@@ -4,9 +4,7 @@
 
 또 다른 방법으로는 이번에 설명할 주제인데, `tagged union` 혹은 `discriminated union`이라고 한다.
 
-간단히 말하면 `tagged union`은 명시적으로 타입에 태그를 붙이는 것이다.
-
-먼저 다음 예시를 보자.
+간단히 말하면 `tagged union`은 명시적으로 타입에 태그를 붙이는 것이다. 먼저 다음 예시를 보자.
 
 세 종류의 도형(원, 직사각형, 정사각형)이 있고, 이에 대한 `interface`(또는 `type alias`)를 정의한다고 생각해보자. 원의 반지름(`radius`), 직사각형의 너비(`width`)와 높이(`height`), 정사각형의 한 변의 길이(`size`)를 모두 가져야 한다.
 
@@ -182,3 +180,16 @@ const userReducer = (
 ```
 
 `Shape`의 예제에서는 `kind`가, `redux`의 `action`에서는 `type`이 각각 유일한 문자열 리터럴 타입의 태그로서 타입을 구분하여 특정한 동작을 수행할 수 있도록 했다.
+
+<details>
+    <summary> 🔖 참고 </summary>
+
+- [https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions)
+- [https://mariusschulz.com/blog/tagged-union-types-in-typescript](https://mariusschulz.com/blog/tagged-union-types-in-typescript)
+- [https://gregoryppabian.medium.com/creating-tagged-unions-in-typescript-ce727a306878](https://gregoryppabian.medium.com/creating-tagged-unions-in-typescript-ce727a306878)
+- [https://mainawycliffe.dev/blog/better-types-using-discriminated-types-in-typescript/](https://mainawycliffe.dev/blog/better-types-using-discriminated-types-in-typescript/)
+- [https://medium.com/@ahsan.ayaz/understanding-discriminated-unions-in-typescript-1ccc0e053cf5](https://medium.com/@ahsan.ayaz/understanding-discriminated-unions-in-typescript-1ccc0e053cf5)
+- [https://thoughtbot.com/blog/the-case-for-discriminated-union-types-with-typescript](https://thoughtbot.com/blog/the-case-for-discriminated-union-types-with-typescript)
+- [https://www.fullstory.com/blog/discriminated-unions-and-exhaustiveness-checking-in-typescript/](https://www.fullstory.com/blog/discriminated-unions-and-exhaustiveness-checking-in-typescript/)
+
+</details>
