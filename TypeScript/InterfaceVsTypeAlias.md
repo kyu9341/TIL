@@ -80,7 +80,7 @@ class Person implements IPerson {
 
 `interface`는 `extends` 키워드를 통해 `interface` 또는 `class`를 상속받을 수 있다.
 
-- `**declaration merging**` (선언 병합)
+- **`declaration merging`** (선언 병합)
 
 ```tsx
 interface Person {
@@ -216,7 +216,7 @@ type Flatten<T> = T extends any[] ? Flatten<T[number]> : T;
 - `type`은 새로운 이름을 만들지 않지만, `interface`는 새로운 이름을 만든다.
   - 즉, `type alias`는 에러 메시지같은 곳에서 별칭으로 출력되지 않고, 리터럴 그대로 출력된다.
   - 에디터에서 `interface`에 마우스를 올리면 `Interface`를 반환한다고 보여주지만 `alias`는 객체 리터럴 타입을 반환한다고 보여준다.
-- 인터페이스는 `**declaration merging**`(선언 병합)이 가능하다.
+- 인터페이스는 **`declaration merging`**(선언 병합)이 가능하다.
   - 즉, 같은 이름의 인터페이스를 여러번 선언할 수 있다. 그러나 `type alias`는 그렇지 않다.
 
 ---
