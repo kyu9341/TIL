@@ -179,7 +179,7 @@ const directions = [0 /* Up */, 1 /* Down */, 2 /* Left */, 3 /* Right */];
 
 ### `object const assertion`
 
-위에서 언급한 `string enum`을 대체할 방법이다. 타입과 값으로 모두 사용할 수 있는 `enum`을 대체하려면 `obejct`에 `const assertion`을 사용하여 `value`를 리터럴 타입으로 추론하도록 한 후 그 `values`의 `union`으로 사용한다.
+위에서 언급한 `string enum`을 대체할 방법이다. 타입과 값으로 모두 사용할 수 있는 `enum`을 대체하려면 `object`에 `const assertion`을 사용하여 `value`를 리터럴 타입으로 추론하도록 한 후 그 `values`의 `union`으로 사용한다.
 
 ```tsx
 const DIRECTION = {
@@ -193,7 +193,7 @@ type DirectionType = typeof DIRECTION[keyof typeof DIRECTION];
 // "up" | "down" | "left" | "right"
 ```
 
-위와 같이 `**obejct`에 `const assertion`을 사용**하고 `keyof` 키워드를 활용하여 해당 객체의 값들에 대한 `union` 타입을 생성하여 사용한다. 이를 유틸리티 타입으로 만들면 아래와 같이 사용할 수 있다.
+위와 같이 **`object`에 `const assertion`을 사용**하고 `keyof` 키워드를 활용하여 해당 객체의 값들에 대한 `union` 타입을 생성하여 사용한다. 이를 유틸리티 타입으로 만들면 아래와 같이 사용할 수 있다.
 
 - `Values` utility type 정의
 
@@ -209,7 +209,7 @@ type DirectionType = Values<typeof DIRECTION>;
 
 ### `string enum` vs `object const assertion`
 
-`**string enum**`
+**`string enum`**
 
 **장점**
 
@@ -222,7 +222,7 @@ type DirectionType = Values<typeof DIRECTION>;
 - `string enum`은 타입스크립트의 다른 타입들과 달리 구조적 타이핑이 아닌 명목적 타이핑을 사용하여 자바스크립트와 타입스크립트에서의 동작이 다름
 - `string enum`은 명목적 타이핑을 사용하므로 모든 곳에서 선언한 `enum`을 `import`하여 사용해야 하는 번거로움
 
-`**object const assertion**`
+**`object const assertion`**
 
 위의 `string enum`의 장단점을 뒤집으면 `object const assertion`의 장단점이라고 볼 수 있다.
 
