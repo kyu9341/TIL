@@ -19,7 +19,8 @@ Today I Learned
 
 - [타입 단언 / 타입 추론](https://github.com/kyu9341/TIL/blob/main/TypeScript/TypeInference_TypeAssertion.md)
 - [`type` / `interface`](https://github.com/kyu9341/TIL/blob/main/TypeScript/InterfaceVsTypeAlias.md)
-
+- [`enum`](https://github.com/kyu9341/TIL/blob/main/TypeScript/enum.md)
+- [`tagged union`](https://github.com/kyu9341/TIL/blob/main/TypeScript/tagged-union.md)
 ## 🌻 React
 
 - [`virtual DOM`](https://github.com/kyu9341/TIL/blob/main/React/virtualDOM.md)
