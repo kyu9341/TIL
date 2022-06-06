@@ -93,7 +93,7 @@ interface Person {
 
 const person: Person = {
   name: 'kwon',
-  age: '27',
+  age: 27,
 };
 ```
 
