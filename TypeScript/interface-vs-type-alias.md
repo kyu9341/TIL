@@ -203,22 +203,48 @@ type Flatten<T> = T extends any[] ? Flatten<T[number]> : T;
 
 ---
 
-### `type`과 `interface`의 차이
+### **`interface` 와 `type alias` 차이**
 
-타입과 인터페이스는 거의 동일하지만 약간의 차이가 있다.
+인터페이스와 `type alias` 비슷하지만 약간의 차이가 있다.
 
-- `interface`는 상속(`extends`)되거나 구현(`implements`)될 수 있으며, 다른 타입을 상속하거나 구현할 수 있다. 그러나 `type alias`는 그렇지 않다. (`TS 2.7` 부터는 타입도 인터섹션을 통해 다른 타입을 상속할 수 있다.)
-  ```tsx
-  type Student = Person & { grade: number };
-  ```
-  위와 같이 인터섹션 타입을 이용해서 `type` 으로도 상속을 구현할 수 있다.
-- `interface`는 객체 타입만 정의가 가능한 것과 달리 `type alias`는 원시 타입, 배열과 튜플, 유니온 타입 등에 `alias`을 붙일 수 있고, `mapped type`이나 `conditional type`을 사용할 수 있다.
-- `type`은 새로운 이름을 만들지 않지만, `interface`는 새로운 이름을 만든다.
-  - 즉, `type alias`는 에러 메시지같은 곳에서 별칭으로 출력되지 않고, 리터럴 그대로 출력된다.
-  - 에디터에서 `interface`에 마우스를 올리면 `Interface`를 반환한다고 보여주지만 `alias`는 객체 리터럴 타입을 반환한다고 보여준다.
-- 인터페이스는 **`declaration merging`**(선언 병합)이 가능하다.
-  - 즉, 같은 이름의 인터페이스를 여러번 선언할 수 있다. 그러나 `type alias`는 그렇지 않다.
-
+- `interface`는 객체 타입만 정의가 가능한 것과 달리 `type alias`는 원시 타입, 배열과 튜플, 유니온 타입 등에 `alias`을 붙일 수 있다.
+- 인터페이스는 `declaration merging`(선언 병합)이 가능하다.
+    - 즉, 같은 이름의 인터페이스를 여러 번 선언할 수 있다. 그러나 `type alias`는 그렇지 않다.
+        
+        ```tsx
+        type Person {  // Error
+          name: string;
+        }
+          
+        type Person {  // Error
+          age: number;
+        }
+        ```
+        
+- `mapped type`은 `type alias`에서만 사용 가능하다.
+- `type alias`에서도 `interface`의 `extends` 처럼 인터섹션 타입을 통해서 상속을 구현할 수 있는데, 약간의 차이가 있다.
+    - `interface` 상속의 경우 상위 타입에 존재하는 프로퍼티를 하위 타입에서 선언한 경우 상위 인터페이스의 속성 타입의 하위 타입인 경우(그렇지 않다면 에러)에 한해서, 재정의되는 방식으로 동작한다.
+    - 반면, `type alias`에서 인터섹션 타입을 사용하는 경우 동일한 이름의 프로퍼티가 있다면 재정의 하는 것이 아니라, 두 타입의 인터섹션 타입으로 정의된다.
+        
+        ```tsx
+        type A = {
+          a: string;
+          b: string;
+        }
+         
+        type B = A & {
+          b: number;
+        };
+        ```
+        
+        위와 같이 인터섹션으로 상속한 경우 B는 아래와 같은 타입이 된다.
+        
+        ```tsx
+        type B = {
+          a: string;
+          b: never; // number & string
+        }
+        ```
 ---
 
 <details>
