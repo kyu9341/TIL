@@ -41,6 +41,7 @@ const regx = new RegExp('a+');
 - `m` (`multi line`) : 여러 줄 일치
 - `u` (`unicode`) : 유니코드 문자 처리
 - `y` (`sticky`) : `lastIndex` 속성으로 지정된 인덱스에서만 1회 일치
+- `i` (`ignore case`) : 대소문자를 구분하지 않음
 
 ## 정규식 패턴
 
